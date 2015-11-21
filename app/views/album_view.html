@@ -1,0 +1,19 @@
+<div style="padding: 50px;">
+    
+    <h3>{{album_name}}</h3>
+    
+    <div class="alert alert-danger" ng-show="loadErrorText">
+        {{loadErrorText}}
+    </div>
+    
+    <div class="photo thumbnail" 
+         style="250px; float: left; margin-right: 10px"
+         ng-repeat="photo in photos">
+        
+        <a href="/app/index.html#/albums/{{album_name}}/photos.{{photo.filename}}">
+            <img src="/app/images/{{album_name}}/thumb/{{photo.filename}}"/>
+        </a>
+        <p>{{photo.description}}</p>
+        
+    </div>
+</div>
