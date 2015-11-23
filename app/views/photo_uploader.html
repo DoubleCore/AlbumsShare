@@ -1,0 +1,70 @@
+<div class="container" >
+    <div style="float: right; padding: 5px">
+        <a href="/app/index.html">Back to Home</a>
+    </div>
+
+    <div style="clear:both"></div>
+
+    <p>
+        <input ng-file-select type="file" multiple />
+    </p>
+
+    <div class="photo-uploader" ng-repeat="item in uploader.queue">
+        <div class="thumbnail">
+          <div class="caption">
+            <div style="overflow: hidden; white-space: nowrap">
+                <strong>Name:</strong>{{item.file.name}}
+            </div>
+            <div>
+                <input type="text" ng-model="descriptions[item.file.description]"
+                       style="width: 100%; border: 10px solid #ddd"
+                       placeholder="Description"/>
+            </div>
+            <div class="progress">
+              <div class="progress-bar" 
+                   role="progressbar" 
+                   aria-valuenow="{{item.progress}}" 
+                   aria-valuemin="0" 
+                   aria-valuemax="100" 
+                   style="width: {{item.progress}}%;">
+              </div>
+            </div>
+            <p>
+                <a href="#" 
+                  class="btn btn-primary" 
+                  role="button"
+                  ng-click="item.remove()">
+                    Remove
+                </a> 
+            </p>
+          </div>
+        </div>
+    </div>
+
+    <div style="clear: left"></div>
+
+    <div ng-show="uploader.queue.length > 0">
+        <div>
+            Total Progress: {{uploader.progress}}
+            <div class="progress">
+              <div class="progress-bar" 
+                   role="progressbar" 
+                   aria-valuenow="{{uploader.progress}}" 
+                   aria-valuemin="0" 
+                   aria-valuemax="100" 
+                   style="width: {{uploader.progress}}%;">
+              </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary"
+                ng-click="uploader.uploadAll()" 
+                ng-disabled="!uploader.getNotUploadedItems().length">Upload all</button>
+        <button class="btn btn-warning"
+                ng-click="uploader.cancelAll()" 
+                ng-disabled="!uploader.isUploading">Cancel all</button>
+        <button class="btn btn-danger"
+                ng-click="uploader.clearQueue()" 
+                ng-disabled="!uploader.queue.length">Remove all</button>
+    </div>
+</div>

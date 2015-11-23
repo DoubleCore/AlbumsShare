@@ -3,12 +3,17 @@
         .controller('albumViewController', function ($scope, $routeParams, albumService) {
             $scope.loadErrorText = "";
             $scope.album_name = $routeParams.album_name;
-        
-            try{
-                var album = albumService.getAlbumByName($scope.album_name);
-                $scope.photos = album.photos;
-            }catch(e){
-                $scope.loadErrorText = "Invalid Album Name";
-            }
+            $scope.pageLoadError = "";
+            albumService.getPhotosByAlbumName($scope.album_name, function (err, photos){
+                if (err){
+                    if (err.code == "not_found") {
+                        $scope.pageLoadError = "Page Not Found!";
+                    } else {
+                        $scope.pageLoadError = "Unexpected Error " + err.code + " " + err.message; 
+                    }
+                } else {
+                    $scope.photos = photos;
+                }
+            })
     });
 })();

@@ -1,5 +1,5 @@
 (function () {
-    angular.module('albumsShareApp', ['ngRoute']). 
+    angular.module('albumsShareApp', ['ngRoute', 'angularFileUpload']). 
         config(function ($routeProvider) {
             $routeProvider
                 .when ("/albums", {
@@ -10,11 +10,13 @@
                     controller: 'albumViewController',
                     templateUrl: 'views/album_view.html'
                 })
+                .when("/albums/:album_name/upload",{
+                    controller: 'photoUploadController',
+                    templateUrl: 'views/photo_uploader.html'
+                })
                 .when ("/", {
                     redirectTo: '/albums'
-                })
-                .otherwise ({
-                    templateUrl: 'views/404.html'
                 });
+                
         });
 })();
