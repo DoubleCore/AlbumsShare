@@ -1,15 +1,6 @@
 (function () {
     angular.module('albumsShareApp')
-        .service('albumService',['$http', '$fileUploader', function ($http, $fileUploader) {
-            
-            this.getUploader = function (album_name, scope) {
-                return $fileUploader.create({
-                    scope: scope,
-                    method: "PUT",
-                    url: "/v1/albums/"+album_name+"/photos.json"
-                });
-            };
-            
+        .service('albumService',['$http', 'Upload', function ($http, Upload) {
             this.getAlbums = function (callback) {
                 $http.get("/v1/albums.json")
                     .success(function (data, status, headers, conf) {
@@ -19,16 +10,16 @@
                         callback(data);
                     });
             };
-
-            this.getPhotosByAlbumName = function (name, callback) {
-                $http.get("/v1/albums/" + name +  "/photos.json")
+            
+            this.getPhotosForAlbum = function (album_name, callback) {
+                $http.get("/v1/albums/"+album_name+"/photos.json")
                     .success(function (data, status, headers, conf) {
                         callback(null, data);
                     })
                     .error(function (data, status, headers, conf){
                         callback(data);
                     });
-            };
+            }
 
             this.addAlbum = function (data, callback){
                 if (!data.name)  return callback({code : "missing_name"});

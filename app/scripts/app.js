@@ -1,5 +1,5 @@
 (function () {
-    angular.module('albumsShareApp', ['ngRoute', 'angularFileUpload']). 
+    angular.module('albumsShareApp', ['ngRoute', 'ngFileUpload']). 
         config(function ($routeProvider) {
             $routeProvider
                 .when ("/albums", {

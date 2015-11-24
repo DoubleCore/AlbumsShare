@@ -1,10 +1,10 @@
 (function () {
     angular.module('albumsShareApp')
-        .controller('albumViewController', function ($scope, $routeParams, albumService) {
+        .controller('albumViewController', function ($scope, $routeParams, albumService, $location) {
             $scope.loadErrorText = "";
             $scope.album_name = $routeParams.album_name;
-            $scope.pageLoadError = "";
-            albumService.getPhotosByAlbumName($scope.album_name, function (err, photos){
+        
+            albumService.getPhotosForAlbum($scope.album_name, function (err, photos){
                 if (err){
                     if (err.code == "not_found") {
                         $scope.pageLoadError = "Page Not Found!";
@@ -14,6 +14,6 @@
                 } else {
                     $scope.photos = photos;
                 }
-            })
+            });
     });
 })();

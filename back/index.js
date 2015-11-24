@@ -250,6 +250,8 @@ function _http_code_from_error (error_code) {
 
 
 
+
+
 console.error("Starting Server.");
 app.listen(_port);
 
@@ -352,8 +354,8 @@ function mkdirs_for_album (album_name, callback) {
  * UNDONE: make thumbnails!!!
  */
 function copy_file_to_destinations (uploadfn, album_name, destfn, callback) {
-    var np1 = __dirname + "/../front/media/" + album_name + "/thumb/" + destfn;
-    var np2 = __dirname + "/../front/media/" + album_name + "/full/" + destfn;
+    var np1 = __dirname + "/../app/images/" + album_name + "/thumb/" + destfn;
+    var np2 = __dirname + "/../app/images/" + album_name + "/full/" + destfn;
 
     copy_file(uploadfn, np1, function (err, results) {
         if (err) {

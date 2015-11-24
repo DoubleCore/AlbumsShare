@@ -11,11 +11,12 @@
     <div class="photo thumbnail" 
          style="250px; float: left; margin-right: 10px"
          ng-repeat="photo in photos">
-        
-        <a href="/app/index.html#/albums/{{album_name}}/photos.{{photo.filename}}">
-            <img src="/app/images/{{album_name}}/thumb/{{photo.filename}}"/>
-        </a>
-        <p>{{photo.description}}</p>
-        
+        <img src="../images/{{album_name}}/thumb/{{photo.name}}" />
+        <div class="caption">
+            <h2>{{photo.name}}</h2>
+            <p>
+                {{photo.description}}
+            </p>
+        </div>
     </div>
 </div>
