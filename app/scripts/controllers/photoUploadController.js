@@ -1,6 +1,7 @@
 (function () {
     angular.module('albumsShareApp')
-        .controller('photoUploadController', function ($scope, $location, $routeParams, albumService, FileUploader){
+        .controller('photoUploadController', ['$scope', '$location','$routeParams', 'albumService', 'FileUploader' , 
+                                              function ($scope, $location, $routeParams, albumService, FileUploader){
         $scope.album_name = $routeParams.album_name;
         $scope.page_load_error = "";
         $scope.finishedUploading = false;
@@ -39,5 +40,5 @@
             if (!out) out = "unknown_" + (new Date()).getTime();
             return out;
         }
-    });
+    }]);
 })();
