@@ -4,6 +4,17 @@
     "title": "tempTitle",
     "date": "11/23/2015",
     "description": "Temp Description for tempAlbum",
-    "photos": []
+    "photos": [
+      {
+        "filename": "1.jpg",
+        "date": "2015/10/22",
+        "description": "desc desc"
+      },
+      {
+        "filename": "2.jpg",
+        "date": "2015/10/22",
+        "description": "desc desc"
+      }
+    ]
   }
 ]

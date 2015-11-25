@@ -1,6 +1,14 @@
 (function () {
     angular.module('albumsShareApp')
-        .service('albumService',['$http', 'Upload', function ($http, Upload) {
+        .service('albumService',['$http', 'FileUploader', function ($http, FileUploader) {
+
+          this.getUploader = function (album_name) {
+            return new FileUploader({
+              method: "PUT",
+              url: "/v1/albums/"+album_name+"/photos.json",
+            });
+          }
+
             this.getAlbums = function (callback) {
                 $http.get("/v1/albums.json")
                     .success(function (data, status, headers, conf) {
@@ -10,7 +18,7 @@
                         callback(data);
                     });
             };
-            
+
             this.getPhotosForAlbum = function (album_name, callback) {
                 $http.get("/v1/albums/"+album_name+"/photos.json")
                     .success(function (data, status, headers, conf) {
@@ -20,6 +28,23 @@
                         callback(data);
                     });
             }
+
+            this.addPhotoToAlbum = function (album_name, photo, callback) {
+                if (!photo.name) return callback({code: "missing_name"});
+                if (!photo.title) return callback({code: "missing_title"});
+                if (!photo.description) return callback({code: "missing_description"});
+                if (!photo.date) return callback({code: "missing_date"});
+                var d = new Date(photo.date.trim());
+                if (isNaN(d.getTime())) return callback({code: "invalid_date"});
+
+                $http.put("/v1/albums/"+album_name+"/photos.json", photo)
+                  .success(function (data, status, headers, conf) {
+                    callback(null, data);
+                  })
+                  .error(function (data, status, headers, conf) {
+                    callback(data);
+                  });
+            };
 
             this.addAlbum = function (data, callback){
                 if (!data.name)  return callback({code : "missing_name"});

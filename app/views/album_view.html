@@ -1,14 +1,15 @@
 <div style="padding: 50px;">
-    
+
+
+
     <h3>{{album_name}}</h3>
-    
+
     <div class="alert alert-danger" ng-show="loadErrorText">
         {{loadErrorText}}
     </div>
-
     <a href="#/albums/{{album_name}}/upload"><button class="btn btn-success">Upload Photos</button></a>
-    
-    <div class="photo thumbnail" 
+
+    <div class="photo thumbnail"
          style="250px; float: left; margin-right: 10px"
          ng-repeat="photo in photos">
         <img src="../images/{{album_name}}/thumb/{{photo.name}}" />

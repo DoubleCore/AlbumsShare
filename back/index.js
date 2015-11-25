@@ -114,7 +114,7 @@ app.get("/v1/albums/:album_name/photos.json", function (req, res) {
 
 app.put("/v1/albums/:album_name/photos.json", function (req, res) {
 
-    if (!req.body || !req.body.filename)
+    if (!req.body || !req.body.name)
         return send_error_resp(res, 400, "missing_data", "Specify a filename.");
     else if (!req.body.description)
         return send_error_resp(res, 400, "missing_data", "Specify a description.");
@@ -130,7 +130,7 @@ app.put("/v1/albums/:album_name/photos.json", function (req, res) {
             return send_error_resp(res, 404, "not_found", "No such album");
 
         if (!album.photos) album.photos = [];
-        if (photo_in_album_by_filename(req.params.album_name, req.body.filename)) {
+        if (photo_in_album_by_filename(req.params.album_name, req.body.name)) {
             return send_error_resp(res, 400, "invalid_data",
                                    "Duplicate filename for album.");
         }
@@ -138,13 +138,13 @@ app.put("/v1/albums/:album_name/photos.json", function (req, res) {
         // before i modify the array, copy the file to the media 
         // location.
         var upfn = req.files.file.path;
-        copy_file_to_destinations(upfn, rpan, req.body.filename, function (err) {
+        copy_file_to_destinations(upfn, rpan, req.body.name, function (err) {
             if (err) {
                 return send_filecopy_error(res, err);
             } else {
                 // it's good, add it.
                 var p = {
-                    filename: req.body.filename,
+                    filename: req.body.name,
                     date: req.body.date,
                     description: req.body.description
                 };
@@ -178,8 +178,8 @@ app.post("/v1/albums/:album_name/photos/:filename.json", function (req, res) {
     if (!photo)
         return send_error_resp(res, 404, "not_found", "No such photo");
 
-    if (req.body.filename
-        && req.body.filename.toLowerCase() != photo.filename.toLowerCase())
+    if (req.body.name
+        && req.body.name.toLowerCase() != photo.filename.toLowerCase())
         return send_error_resp(res, 400, "not_supported", "Can't edit filenames yet");
 
     if (req.body.description) album.description = req.body.description;

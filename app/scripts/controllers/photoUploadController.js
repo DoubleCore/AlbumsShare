@@ -1,24 +1,32 @@
 (function () {
     angular.module('albumsShareApp')
-        .controller('photoUploadController', function ($scope, $location, $routeParams, albumService, Upload, $timeout){
+        .controller('photoUploadController', function ($scope, $location, $routeParams, albumService, FileUploader){
         $scope.album_name = $routeParams.album_name;
         $scope.page_load_error = "";
         $scope.finishedUploading = false;
-        $scope.photosDescriptions = {};
-        
-         $scope.uploader = function (file) {
-                    var filename = _fix_filename(file.name);
-                    Upload.upload({
-                        url: "/v1/albums/" + $scope.album_name + "/photos.json",
-                        method: "PUT",
-                        data: {
-                            filename: _fix_filename(file.name),
-                            date: file.date,
-                            description: $scope.photosDescriptions[file.name]
-                        }
-                    });
-                }
-        
+        $scope.description = "";
+
+        $scope.uploader = albumService.getUploader($scope.album_name);
+
+        $scope.uploader.onBeforeUploadItem = function (item) {
+          var fn = _fix_filename(item.file.name);
+          var d = item.file.lastModifiedDate;
+          item.formData = [{
+            name: fn,
+            date: d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate(),
+            description: "desc desc"
+          }];
+          item.uploader.formData = item.formData;
+        }
+
+        $scope.uploader.onCompleteAll = function () {
+          $scope.finishedUploading = true;
+        }
+
+        $scope.uploader.onErrorItem = function(fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+
         function _fix_filename(fn) {
             if (!fn || fn.length == 0)  return "unknown";
 
