@@ -4,7 +4,6 @@
         $scope.album_name = $routeParams.album_name;
         $scope.page_load_error = "";
         $scope.finishedUploading = false;
-        $scope.description = "";
 
         $scope.uploader = albumService.getUploader($scope.album_name);
 
@@ -14,7 +13,6 @@
           item.formData = [{
             name: fn,
             date: d.getFullYear() + "/" + d.getMonth() + "/" + d.getDate(),
-            description: "desc desc"
           }];
           item.uploader.formData = item.formData;
         }

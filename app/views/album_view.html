@@ -1,22 +1,31 @@
 <div style="padding: 50px;">
-
-
-
-    <h3>{{album_name}}</h3>
-
     <div class="alert alert-danger" ng-show="loadErrorText">
         {{loadErrorText}}
     </div>
-    <a href="#/albums/{{album_name}}/upload"><button class="btn btn-success">Upload Photos</button></a>
+    
+    <div style="float: right; padding: 5px">
+        <a class="btn btn-primary" href="/#/albums/">Back to Home</a>
+    </div>
+    
+    <h3>{{album_title}}</h3>
+    
+    <div style="float: right; clear: right">
+        <a href="#/albums/{{album_name}}/upload"><button class="btn btn-success">Upload Photos</button></a>
+    </div>
 
     <div class="photo thumbnail"
-         style="250px; float: left; margin-right: 10px"
+         style="width: 250px;height: 300px; float: left; margin-right: 10px"
          ng-repeat="photo in photos">
-        <img src="../images/{{album_name}}/thumb/{{photo.name}}" />
+        <img ng-src="../images/{{album_name}}/thumb/{{photo.filename}}" width="450px" height="200px"/>
         <div class="caption">
-            <h2>{{photo.name}}</h2>
+            <h2>{{photo.filename}}</h2>
             <p>
-                {{photo.description}}
+                {{photo.date}}
+            </p>
+            <br>
+            <p
+               ><a href="#/albums/{{album_name}}/photos/{{photo.filename}}" class="btn btn-primary" role="button">View Full</a> 
+                <a href="#" class="btn btn-danger" role="button">Delete</a>
             </p>
         </div>
     </div>

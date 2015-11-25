@@ -116,8 +116,6 @@ app.put("/v1/albums/:album_name/photos.json", function (req, res) {
 
     if (!req.body || !req.body.name)
         return send_error_resp(res, 400, "missing_data", "Specify a filename.");
-    else if (!req.body.description)
-        return send_error_resp(res, 400, "missing_data", "Specify a description.");
     else if (!req.body.date)
         return send_error_resp(res, 400, "missing_data", "Specify a date.");
     else {
@@ -146,7 +144,6 @@ app.put("/v1/albums/:album_name/photos.json", function (req, res) {
                 var p = {
                     filename: req.body.name,
                     date: req.body.date,
-                    description: req.body.description
                 };
                 album.photos.push(p);
                 fs.writeFileSync(_filename, JSON.stringify(photo_album_tree, null, 2));

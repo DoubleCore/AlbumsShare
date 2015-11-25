@@ -1,11 +1,14 @@
-<div class="container" ng-show="isDoneLoading">
+<div class="container" ng-show="isDoneLoading" style="padding: 50px;">
 
-    <!-- 
+    <!--
         Create Search Bar!
     -->
+    <input type="text" ng-model="searchField" style="display: block; margin: 0 auto; width: 250px"
+           placeholder="Search for ..."/>
+    
+    <div style="clear: left"></div>
 
-
-    <div class="album panel panel-primary" ng-repeat="album in Albums | orderBy: 'date'">
+    <div class="album panel panel-primary" ng-repeat="album in Albums| filter: searchField | orderBy: 'date'">
       <div class="panel-heading">
         <h3 class="panel-title">
             <a href="#/albums/{{album.name}}">{{album.title}}</a>
@@ -33,35 +36,37 @@
             <div class="panel-heading">
                 <input type="text" placeholder="Enter Title" size="20" ng-model="tempAlbum.title"/>
                 <div style="float: right">
-                    <input name="date" 
-                           ng-required="true" 
-                           ng-minlength="10" 
-                           type="text" 
-                           placeholder="MM/DD/YYYY" 
-                           size="10" 
+                    <input name="date"
+                           ng-required="true"
+                           ng-minlength="10"
+                           type="text"
+                           placeholder="MM/DD/YYYY"
+                           size="10"
                            ng-model="tempAlbum.date" />
                 </div>
             </div>
             <div class="description">
                 <p>
-                    <textarea ng-model="tempAlbum.description" 
-                              placeholder="Description" 
-                              rows="8" 
+                    <textarea ng-model="tempAlbum.description"
+                              placeholder="Description"
+                              rows="8"
                               style="width: 100%; resize: none"></textarea>
                 </p>
                 <p>
-                    <input type="text" 
-                           ng-model="tempAlbum.name" 
-                           style="width: 100%" 
+                    <input type="text"
+                           ng-model="tempAlbum.name"
+                           style="width: 100%"
                            placeholder="Short Name"/>
                 </p>
                 <p>
-                    <button ng-click="addAlbum()" 
-                            type="button" 
-                            class="btn btn-success" 
+                    <button ng-click="addAlbum()"
+                            type="button"
+                            class="btn btn-success"
                             style="width: 100%;">Add Album</button>
+                    
+                    (last album: {{last_album_created ? last_album_created : "none"}})
                 </p>
             </div>
         </form>
     </div>
-</div> 
+</div>

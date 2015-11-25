@@ -1,10 +1,11 @@
 (function() {
     angular.module('albumsShareApp').
-    controller('appController', ['$scope','albumService','$location', function ($scope, albumService, $location) {
+    controller('appController', ['$scope','albumService','$location','$cookies', function ($scope, albumService, $location, $cookies) {
             $scope.pageLoadError = "";
             $scope.input_error = "";
             $scope.tempAlbum = {};
             $scope.isDoneLoading = false;
+            $scope.last_album_created = $cookies.get("last_album_created");
 
             albumService.getAlbums(function (err, albums) {
                 if (err) {
@@ -33,6 +34,7 @@
                         else if (err.code == "invalid_date")
                             $scope.input_error = "Please provide a valid date.";
                     } else {
+                        $cookies.put("last_album_created", $scope.tempAlbum.name);
                         $location.path("/albums/" + $scope.tempAlbum.name);
 
                     }
