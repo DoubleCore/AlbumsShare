@@ -1,34 +1,9 @@
 [
   {
-    "name": "sdfdsf",
-    "title": "ryut",
-    "date": "12/12/2012",
-    "description": "sdgfds",
-    "photos": [
-      {
-        "filename": "1.jpg",
-        "date": "2015/10/22"
-      },
-      {
-        "filename": "2.jpg",
-        "date": "2015/10/22"
-      }
-    ]
-  },
-  {
-    "name": "albuim2",
-    "title": "album2",
-    "date": "11/11/2012",
+    "name": "asd",
+    "title": "asd",
+    "date": "2015-11-09T22:00:00.000Z",
     "description": "asd",
-    "photos": [
-      {
-        "filename": "1.jpg",
-        "date": "2015/10/22"
-      },
-      {
-        "filename": "2.jpg",
-        "date": "2015/10/22"
-      }
-    ]
+    "photos": []
   }
 ]

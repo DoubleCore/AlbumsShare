@@ -1,7 +1,7 @@
 (function () {
     angular.module('albumsShareApp')
         .controller('albumViewController', 
-                    ['$scope', '$routeParams', 'albumService','$lcoation',
+                    ['$scope', '$routeParams', 'albumService','$location',
             function ($scope, $routeParams, albumService, $location) {
                 $scope.loadErrorText = "";
                 $scope.album_name = $routeParams.album_name;

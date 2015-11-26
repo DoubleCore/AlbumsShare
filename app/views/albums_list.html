@@ -1,72 +1,27 @@
 <div class="container" ng-show="isDoneLoading" style="padding: 50px;">
 
-    <!--
-        Create Search Bar!
-    -->
     <input type="text" ng-model="searchField" style="display: block; margin: 0 auto; width: 250px"
-           placeholder="Search for ..."/>
-    
+    placeholder="Search for ..."/>
+
+    <button class="btn btn-primary" type="button" ng-click="openDialog()">Create new Album</button>
+
+
     <div style="clear: left"></div>
 
     <div class="album panel panel-primary" ng-repeat="album in Albums| filter: searchField | orderBy: 'date'">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-            <a href="#/albums/{{album.name}}">{{album.title}}</a>
-            <div class="date" style="float: right">
-                {{album.date | date}}
-            </div>
-          </h3>
-      </div>
-      <div class="panel-body" style="height: 220px; ">
-        {{album.description}}
-      </div>
-      <div class="panel-footer" style="text-align: center">
-          {{album.name}}
-      </div>
-    </div>
-
-    <div style="clear: left"></div>
-
-    <h3> Add New Album </h3>
-    <div class="album panel panel-default">
-        <div class="alert alert-danger" ng-show="input_error">
-            {{input_error}}
-        </div>
-        <form>
-            <div class="panel-heading">
-                <input type="text" placeholder="Enter Title" size="20" ng-model="tempAlbum.title"/>
-                <div style="float: right">
-                    <input name="date"
-                           ng-required="true"
-                           ng-minlength="10"
-                           type="text"
-                           placeholder="MM/DD/YYYY"
-                           size="10"
-                           ng-model="tempAlbum.date" />
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a href="#/albums/{{album.name}}">{{album.title}}</a>
+                <div class="date" style="float: right">
+                    {{album.date | date}}
                 </div>
-            </div>
-            <div class="description">
-                <p>
-                    <textarea ng-model="tempAlbum.description"
-                              placeholder="Description"
-                              rows="8"
-                              style="width: 100%; resize: none"></textarea>
-                </p>
-                <p>
-                    <input type="text"
-                           ng-model="tempAlbum.name"
-                           style="width: 100%"
-                           placeholder="Short Name"/>
-                </p>
-                <p>
-                    <button ng-click="addAlbum()"
-                            type="button"
-                            class="btn btn-success"
-                            style="width: 100%;">Add Album</button>
-                    
-                    (last album: {{last_album_created ? last_album_created : "none"}})
-                </p>
-            </div>
-        </form>
+            </h3>
+        </div>
+        <div class="panel-body" style="height: 220px; ">
+            {{album.description}}
+        </div>
+        <div class="panel-footer" style="text-align: center">
+            {{album.name}}
+        </div>
     </div>
 </div>

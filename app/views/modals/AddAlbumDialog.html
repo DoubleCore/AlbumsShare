@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4>Create a New Album</h4>
+</div>
+<div class="modal-body">
+<div class="alert alert-danger" ng-show="input_error"> {{ input_error }} </div>
+    <form name="add_album_form" novalidate>
+
+    <p style="width: 100%">
+        <div style="float: right">
+            <!--<input name="date" type="text" placeholder="yyyy/mm/dd" size="20" ng-model="tempAlbum.date"/> -->
+            <p class="input-group">
+                
+              <input type="text" 
+                     class="form-control" 
+                     uib-datepicker-popup="{{format}}" 
+                     ng-model="tempAlbum.date" is-open="status.opened" 
+                     ng-required="true" close-text="Close" 
+                     placeholder="Pick a Date"/>
+                
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    <input type="text" placeholder="Title..." size="30" ng-model="tempAlbum.title"/>
+    </p>
+        <div class="description">
+            <p>
+                <textarea ng-model="tempAlbum.description" placeholder="Description..." rows="4" style="width: 100%"></textarea>
+            </p>
+            <p>
+                <input type="text" ng-model="tempAlbum.name" style="width: 100%"/>
+            </p>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

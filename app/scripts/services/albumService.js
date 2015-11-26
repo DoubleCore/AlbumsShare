@@ -34,7 +34,7 @@
                 if (!data.title) return callback({code : "missing_title"});
                 if (!data.description) return callback({code : "missing_description"});
                 if (!data.date) return callback({code : "missing_date"});
-                var d = new Date(data.date.trim());
+                var d = new Date(data.date);
                 if (isNaN(d.getTime())) return callback( {code: "invalid_date"});
 
                 $http.put("/v1/albums.json", data)
