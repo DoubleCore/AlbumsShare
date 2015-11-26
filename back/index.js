@@ -128,10 +128,6 @@ app.put("/v1/albums/:album_name/photos.json", function (req, res) {
             return send_error_resp(res, 404, "not_found", "No such album");
 
         if (!album.photos) album.photos = [];
-        if (photo_in_album_by_filename(req.params.album_name, req.body.name)) {
-            return send_error_resp(res, 400, "invalid_data",
-                                   "Duplicate filename for album.");
-        }
 
         // before i modify the array, copy the file to the media 
         // location.
